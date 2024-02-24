@@ -3,12 +3,12 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "Shelly_Statistic_flawas"
+name = "PREN_flawas"
 version = "0.0.1"
 authors = [
   { name="Flavio Waser", email="waserflavio@gmail.com" },
 ]
-description = "A small package used to grab data from shelly cloud"
+description = "A small package used for a project at HSLU Luzern."
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
