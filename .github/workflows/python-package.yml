@@ -75,7 +75,7 @@ jobs:
           ./dist/*.whl
     - name: Create GitHub Release
       env:
-        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_TOKEN: ${{ secrets.GHPUBLISH }}
       run: >-
         gh release create
         '${{ github.ref_name }}'
@@ -83,7 +83,7 @@ jobs:
         --notes ""
     - name: Upload artifact signatures to GitHub Release
       env:
-        GITHUB_TOKEN: ${{ github.token }}
+        GITHUB_TOKEN: ${{ secrets.GHPUBLISH }}
       # Upload to GitHub Release using the `gh` CLI.
       # `dist/` contains the built packages, and the
       # sigstore-produced signatures and certificates.
@@ -99,8 +99,8 @@ jobs:
     runs-on: ubuntu-latest
 
     environment:
-      name: testpypi
-      url: https://test.pypi.org/p/<package-name>
+      name: pypi
+      url: https://pypi.org/p/<package-name>
 
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
@@ -114,4 +114,4 @@ jobs:
     - name: Publish distribution 📦 to TestPyPI
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        repository-url: https://test.pypi.org/legacy/
+        repository-url: https://pypi.org/legacy/
