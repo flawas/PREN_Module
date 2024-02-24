@@ -1,7 +1,7 @@
 import unittest
-from src.Shelly_Statistic_flawas import Energy
+from src.PREN_flawas import Energy
 
-class mainTestCase(unittest.TestCase):
+class testEnergy(unittest.TestCase):
 
     def testCheckCloudStatus(self):
         url = "https://shelly-21-eu.shelly.cloud/device/status"
