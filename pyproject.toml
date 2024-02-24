@@ -18,5 +18,5 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/flawas/Python-Shelly-Statistics"
-Issues = "https://github.com/flawas/Python-Shelly-Statistics/issues"
+Homepage = "https://github.com/flawas/PREN_Module"
+Issues = "https://github.com/flawas/PREN_Module/issues"
