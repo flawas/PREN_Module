@@ -2,35 +2,22 @@ import os, sys, logging, time
 from waveshare_epd import epd1in54_V2
 from PIL import Image, ImageDraw, ImageFont
 
-picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'pic')
-libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
-
-if os.path.exists(libdir):
-    sys.path.append(libdir)
-
-def __init__(self):
+def __init__(epd, fontTTC, backgroundBMP ):
     logging.info("Display init")
-    self.__font = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 16)
-    self.__epd = epd1in54_V2.EPD()
-    self.__epd.init(1)
-    self.__background = Image.open(os.path.join(picdir, 'background.bmp'))
-    self.__epd.displayPartBaseImage(self.__epd.getbuffer(self.__background))
+    font = ImageFont.truetype(os.path.join(fontTTC), 16)
+    epd.init(1)
+    background = Image.open(os.path.join(backgroundBMP))
+    epd.displayPartBaseImage(epd.getbuffer(background))
 
     # epd.init(1) # into partial refresh mode
-    self.__draw = ImageDraw.Draw(self.__background)
+    ImageDraw.Draw(background)
 
-
-
-def getepd(self):
-    return self.__epd
-
-def clearDisplay(self):
+def clearDisplay(epd):
     logging.info("Display clear")
     try:
-        self.__epd = epd1in54_V2.EPD()
-        self.__epd.init(0)
-        self.__epd.Clear(0xFF)
-        self.__epd.init(1)
+        epd.init(0)
+        epd.Clear(0xFF)
+        epd.init(1)
         time.sleep(1)
 
     except IOError as e:
@@ -41,13 +28,12 @@ def clearDisplay(self):
         epd1in54_V2.epdconfig.module_exit()
         exit()
 
-def drawPicture(self, picture):
-    logging.info("Display drawPicture")
+def drawPicture(epd, picture):
+    logging.info("Display draw picture")
     try:
-        self.__epd = epd1in54_V2.EPD()
-        self.__epd.init(0)
-        image = Image.open(os.path.join(picdir, picture))
-        self.__epd.display(self.__epd.getbuffer(image))
+        epd.init(0)
+        image = Image.open(os.path.join(picture))
+        epd.display(epd.getbuffer(image))
         time.sleep(15)
 
     except IOError as e:
@@ -58,22 +44,21 @@ def drawPicture(self, picture):
         epd1in54_V2.epdconfig.module_exit()
         exit()
 
-def shutdownDisplay(self):
+def shutdownDisplay(epd):
     logging.info("Display shutdown")
-    self.__epd = epd1in54_V2.EPD()
-    self.__epd.init(0)
-    self.__epd.Clear(0xFF)
-    self.__epd.sleep()
+    epd.init(0)
+    epd.Clear(0xFF)
+    epd.sleep()
 
-def drawInitialDisplay(self):
+def drawInitialDisplay(epd):
     logging.info("Display draw initial display")
     try:
-        self.__epd.init(1)
-        self.updateDisplay(10, 10, 'PREN TEAM 33')
+        epd.init(1)
+        updateDisplay(10, 10, 'PREN TEAM 33')
         # self.updateDisplay(10, 30, 'Initialisierung')
-        self.updateDisplay(10, 80, 'Beanspruchte Zeit')
+        updateDisplay(10, 80, 'Beanspruchte Zeit')
         # self.updateDisplay(10, 100, 'Sekunden')
-        self.updateDisplay(10, 150, 'Stromverbrauch')
+        updateDisplay(10, 150, 'Stromverbrauch')
         # self.updateDisplay(10, 170, 'kW')
 
     except IOError as e:
@@ -84,28 +69,31 @@ def drawInitialDisplay(self):
         epd1in54_V2.epdconfig.module_exit()
         exit()
 
-def updateDisplay(self, x, y, text):
+def updateDisplay(epd, x, y, text, backgroundBMP):
     logging.info("Display update: x:" + str(x) + ", y: " + str(y) + ", text: " + str(text))
     try:
-        self.__epd.init(1)
+        image = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
+        epd.init(1)
+        background = Image.open(os.path.join(backgroundBMP))
 
-        self.__draw.rectangle((x, y, 200, y + 20), fill=0)
-        newimage = self.__background.crop([x, y, 200, y + 20])
-        self.__background.paste(newimage, (x, y))
-        self.__epd.displayPart(self.__epd.getbuffer(self.__background))
+        draw = ImageDraw.Draw(image)
+        draw.rectangle((x, y, 200, y + 20), fill=0)
+        newimage = background.crop([x, y, 200, y + 20])
+        background.paste(newimage, (x, y))
+        epd.displayPart(epd.getbuffer(background))
 
-        self.__draw.rectangle((x, y, 200, y + 20), fill=(255, 255, 255))
-        newimage = self.__background.crop([x, y, 200, y + 20])
-        self.__background.paste(newimage, (x, y))
-        self.__epd.displayPart(self.__epd.getbuffer(self.__background))
+        draw.rectangle((x, y, 200, y + 20), fill=(255, 255, 255))
+        newimage = background.crop([x, y, 200, y + 20])
+        background.paste(newimage, (x, y))
+        epd.displayPart(epd.getbuffer(background))
 
-        self.__draw.text((x, y), text, font=self.__font, fill=0)
-        newimage = self.__background.crop([x, y, 200, y + 20])
+        draw.text((x, y), text, font=font, fill=0)
+        newimage = background.crop([x, y, 200, y + 20])
 
-        self.__background.paste(newimage, (x, y))
-        self.__epd.displayPart(self.__epd.getbuffer(self.__background))
+        background.paste(newimage, (x, y))
+        epd.displayPart(epd.getbuffer(background))
 
-        self.__background.save("background_modified.png")
+        background.save("background_modified.png")
 
     except IOError as e:
         logging.error(e)
