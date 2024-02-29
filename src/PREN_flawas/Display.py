@@ -54,11 +54,11 @@ def drawInitialDisplay(epd, background):
     logging.info("Display draw initial display")
     try:
         epd.init(1)
-        updateDisplay(10, 10, 'PREN TEAM 33', background)
+        updateDisplay(10, 10, 'PREN TEAM 33', backgroundBMP=background)
         # self.updateDisplay(10, 30, 'Initialisierung')
-        updateDisplay(10, 80, 'Beanspruchte Zeit', background)
+        updateDisplay(10, 80, 'Beanspruchte Zeit', backgroundBMP=background)
         # self.updateDisplay(10, 100, 'Sekunden')
-        updateDisplay(10, 150, 'Stromverbrauch', background)
+        updateDisplay(10, 150, 'Stromverbrauch', backgroundBMP=background)
         # self.updateDisplay(10, 170, 'kW')
 
     except IOError as e:
@@ -74,7 +74,7 @@ def updateDisplay(epd, x, y, text, backgroundBMP):
     try:
         image = Image.new('1', (epd.width, epd.height), 255)  # 255: clear the frame
         epd.init(1)
-        background = Image.open(os.path.join(backgroundBMP))
+        background = Image.open(backgroundBMP)
 
         draw = ImageDraw.Draw(image)
         draw.rectangle((x, y, 200, y + 20), fill=0)
