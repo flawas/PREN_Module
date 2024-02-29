@@ -45,11 +45,11 @@ def drawInitialDisplay(epd, background, backgroundmodified, font):
     logging.info("Display draw initial display")
     try:
         updateDisplay(epd, 10, 10, 'PREN TEAM 33', background, backgroundmodified, font)
-        # self.updateDisplay(10, 30, 'Initialisierung')
+        # updateDisplay(10, 30, 'Initialisierung')
         updateDisplay(epd, 10, 80, 'Beanspruchte Zeit', background, backgroundmodified, font)
-        # self.updateDisplay(10, 100, 'Sekunden')
+        # updateDisplay(10, 100, 'Sekunden')
         updateDisplay(epd, 10, 150, 'Stromverbrauch', background, backgroundmodified, font)
-        # self.updateDisplay(10, 170, 'kW')
+        # updateDisplay(10, 170, 'kW')
 
     except IOError as e:
         logging.error(e)
