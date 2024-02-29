@@ -24,3 +24,8 @@ def getjson():
             'config': {'1': getPos(1), '2': getPos(2), '3': getPos(3), '4': getPos(4), '5': getPos(5), '6': getPos(6),
                        '7': getPos(7), '8': getPos(8)}}
     return json.dumps(data)
+
+def getconfig():
+    data = {'config': {'1': getPos(1), '2': getPos(2), '3': getPos(3), '4': getPos(4), '5': getPos(5), '6': getPos(6),
+                       '7': getPos(7), '8': getPos(8)}}
+    return json.dumps(data)
