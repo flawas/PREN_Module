@@ -1,4 +1,4 @@
-import json
+import json, time
 
 __config = {
     "Solenoid": [
@@ -31,6 +31,12 @@ __config = {
             "EmergencyStop": 22
         }
     ]
+}
+
+__pos = {
+    "Yellow": 1,
+    "Red": 2,
+    "Blue": 3
 }
 
 __AllActors = [__config["Solenoid"][0]["Red"], __config["Solenoid"][0]["Blue"], __config["Solenoid"][0]["Yellow"],
@@ -82,35 +88,35 @@ def turnLeft():
     #Todo: Decrement function
 
 def incrementPosition():
-    if posYellow == 4:
-        posYellow = 1
+    if __pos["Yellow"] == 4:
+        __pos["Yellow"] = 1
     else:
-        posYellow += 1
-    if posRed == 4:
-        posRed = 1
+        __pos["Yellow"] = __pos["Yellow"] + 1
+    if __pos["Red"] == 4:
+        __pos["Red"] = 1
     else:
-        posRed += 1
-    if posBlue == 4:
-        posBlue = 1
+        __pos["Red"] = __pos["Red"] + 1
+    if __pos["Blue"] == 4:
+        __pos["Blue"] = 1
     else:
-        posBlue += 1
+        __pos["Blue"] = __pos["Blue"] + 1
 
 def solYellow():
-    GPIO.output(SolenoidYellow, GPIO.HIGH)
-    time.sleep(DelaySolenoidColors)
-    GPIO.output(SolenoidYellow, GPIO.LOW)
+    GPIO.output(__config["Solenoid"][0]["Yellow"], GPIO.HIGH)
+    time.sleep(__config["Solenoid"][1]["DelayColors"])
+    GPIO.output(__config["Solenoid"][0]["Yellow"], GPIO.LOW)
 
 def solRed():
-    GPIO.output(SolenoidRed, GPIO.HIGH)
-    time.sleep(DelaySolenoidColors)
-    GPIO.output(SolenoidRed, GPIO.LOW)
+    GPIO.output(__config["Solenoid"][0]["Red"], GPIO.HIGH)
+    time.sleep(__config["Solenoid"][1]["DelayColors"])
+    GPIO.output(__config["Solenoid"][0]["Red"], GPIO.LOW)
 
 def solBlue():
-    GPIO.output(SolenoidBlue, GPIO.HIGH)
-    time.sleep(DelaySolenoidColors)
-    GPIO.output(SolenoidBlue, GPIO.LOW)
+    GPIO.output(__config["Solenoid"][0]["Blue"], GPIO.HIGH)
+    time.sleep(__config["Solenoid"][1]["DelayColors"])
+    GPIO.output(__config["Solenoid"][0]["Blue"], GPIO.LOW)
 
 def solWeight():
-    GPIO.output(SolenoidWeight, GPIO.HIGH)
-    time.sleep(DelaySolenoidWeight)
-    GPIO.output(SolenoidWeight, GPIO.LOW)
+    GPIO.output(__config["Solenoid"][0]["Weight"], GPIO.HIGH)
+    time.sleep(__config["Solenoid"][1]["DelayWeight"])
+    GPIO.output(__config["Solenoid"][0]["Weight"], GPIO.LOW)
