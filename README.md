@@ -8,6 +8,7 @@ It is a Python module that can be accessed via the PyPi public repository.
 ## Installation
 
 ```bash
+pip install RPi.GPIO
 pip install PREN-flawas
 ```
 
