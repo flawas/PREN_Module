@@ -50,15 +50,15 @@ def shutdownDisplay(epd):
     epd.Clear(0xFF)
     epd.sleep()
 
-def drawInitialDisplay(epd):
+def drawInitialDisplay(epd, background):
     logging.info("Display draw initial display")
     try:
         epd.init(1)
-        updateDisplay(10, 10, 'PREN TEAM 33')
+        updateDisplay(10, 10, 'PREN TEAM 33', background)
         # self.updateDisplay(10, 30, 'Initialisierung')
-        updateDisplay(10, 80, 'Beanspruchte Zeit')
+        updateDisplay(10, 80, 'Beanspruchte Zeit', background)
         # self.updateDisplay(10, 100, 'Sekunden')
-        updateDisplay(10, 150, 'Stromverbrauch')
+        updateDisplay(10, 150, 'Stromverbrauch', background)
         # self.updateDisplay(10, 170, 'kW')
 
     except IOError as e:
@@ -87,7 +87,7 @@ def updateDisplay(epd, x, y, text, backgroundBMP):
         background.paste(newimage, (x, y))
         epd.displayPart(epd.getbuffer(background))
 
-        draw.text((x, y), text, font=font, fill=0)
+        draw.text((x, y), text, fill=0)
         newimage = background.crop([x, y, 200, y + 20])
 
         background.paste(newimage, (x, y))
