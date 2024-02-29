@@ -79,7 +79,7 @@ def turnLeft():
         time.sleep(DelaySteps)
         GPIO.output(Step, GPIO.LOW)
     GPIO.out(Enable, GPIO.HIGH)
-    #Todo: Decrement
+    #Todo: Decrement function
 
 def incrementPosition():
     if posYellow == 4:
