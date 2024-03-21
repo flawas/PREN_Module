@@ -2,14 +2,14 @@ import json
 from time import gmtime, strftime
 
 __cube = {
-    "1": "",
-    "2": "",
-    "3": "",
-    "4": "",
-    "5": "",
-    "6": "",
-    "7": "",
-    "8": ""
+    1: "",
+    2: "",
+    3: "",
+    4: "",
+    5: "",
+    6: "",
+    7: "",
+    8: ""
 }
 
 def setPos(int, value):

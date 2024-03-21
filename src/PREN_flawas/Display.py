@@ -2,6 +2,15 @@ import os, sys, logging, time
 from waveshare_epd import epd1in54_V2
 from PIL import Image, ImageDraw, ImageFont
 
+def __init__(epd, fontTTC, backgroundBMP ):
+    logging.info("Display init")
+    font = ImageFont.truetype(os.path.join(fontTTC), 16)
+    epd.init(1)
+    background = Image.open(os.path.join(backgroundBMP))
+    epd.displayPartBaseImage(epd.getbuffer(background))
+
+    # epd.init(1) # into partial refresh mode
+    ImageDraw.Draw(background)
 
 def clearDisplay(epd):
     logging.info("Display clear")
@@ -45,11 +54,11 @@ def drawInitialDisplay(epd, background, backgroundmodified, font):
     logging.info("Display draw initial display")
     try:
         updateDisplay(epd, 10, 10, 'PREN TEAM 33', background, backgroundmodified, font)
-        # updateDisplay(10, 30, 'Initialisierung')
+        # self.updateDisplay(10, 30, 'Initialisierung')
         updateDisplay(epd, 10, 80, 'Beanspruchte Zeit', background, backgroundmodified, font)
-        # updateDisplay(10, 100, 'Sekunden')
+        # self.updateDisplay(10, 100, 'Sekunden')
         updateDisplay(epd, 10, 150, 'Stromverbrauch', background, backgroundmodified, font)
-        # updateDisplay(10, 170, 'kW')
+        # self.updateDisplay(10, 170, 'kW')
 
     except IOError as e:
         logging.error(e)
