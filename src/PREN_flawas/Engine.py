@@ -136,6 +136,14 @@ def incrementPosition():
         __pos["Blue"] = __pos["Blue"] + 1
 
 
+def getIncrementPos(colorName):
+    if colorName == "Blue":
+        return __pos["Blue"]
+    if colorName == "Red":
+        return __pos["Red"]
+    if colorName == "Yellow":
+        return __pos["Yellow"]
+
 def solYellow():
     GPIO.output(__config["Solenoid"][0]["Yellow"], GPIO.HIGH)
     time.sleep(__config["Solenoid"][1]["DelayColors"])
