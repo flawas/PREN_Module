@@ -1,11 +1,13 @@
 import json, time
+import sys
+
 import RPi.GPIO as GPIO
 
 __config = {
     "Solenoid": [
         {
-            "Red": 16,
-            "Yellow": 20,
+            "Red": 20,
+            "Yellow": 16,
             "Blue": 26,
             "Weight": 23
         }, {
@@ -15,10 +17,10 @@ __config = {
     ],
     "Stepperengine": [
         {
-            "Enable": 5,
-            "Direction": 6,
+            "Enable": 6,
+            "Direction": 5,
             "Step": 13,
-            "DelaySteps": 0.0002,
+            "DelaySteps": 0.0005,
             "NumberOfSteps": 800
         }
     ],
@@ -101,23 +103,27 @@ def button_pressed_callback(channel):
 
 def turnRight():
     GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.LOW)
+    time.sleep(0.01)
     for i in range(__config["Stepperengine"][0]["NumberOfSteps"]):
         GPIO.output(__config["Stepperengine"][0]["Direction"], GPIO.LOW)
         GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.HIGH)
         time.sleep(__config["Stepperengine"][0]["DelaySteps"])
         GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.LOW)
     GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.HIGH)
+    print("Turn right")
     # incrementPosition()
 
 
 def turnLeft():
     GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.LOW)
+    time.sleep(0.01)
     for x in range(__config["Stepperengine"][0]["NumberOfSteps"]):
         GPIO.output(__config["Stepperengine"][0]["Direction"], GPIO.HIGH)
         GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.HIGH)
         time.sleep(__config["Stepperengine"][0]["DelaySteps"])
         GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.LOW)
     GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.HIGH)
+    print("Turn left")
     # Todo: Decrement function
 
 
@@ -170,3 +176,10 @@ def solWeight():
     time.sleep(__config["Solenoid"][1]["DelayWeight"])
     GPIO.output(__config["Solenoid"][0]["Weight"], GPIO.LOW)
     print("Gewicht losgelassen")
+
+
+def piezo():
+    GPIO.output(__config["Piezo"][0]["GIPO"], GPIO.HIGH)
+    time.sleep(0.5)
+    GPIO.output(__config["Piezo"][0]["GIPO"], GPIO.LOW)
+    print("Piezo tönt")
