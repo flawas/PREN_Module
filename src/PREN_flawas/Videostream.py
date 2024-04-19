@@ -3,9 +3,9 @@ import numpy as np
 import time, datetime
 import logging
 import logging.config
-
 from os import path
-log_file_path = path.join(path.dirname(path.abspath(__file__)), 'logger.config')
+
+log_file_path = path.join(path.dirname(path.abspath(__name__)), 'logger.config')
 logging.config.fileConfig(log_file_path)
 logger = logging.getLogger("Engine")
 

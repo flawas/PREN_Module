@@ -2,9 +2,9 @@ import requests, json
 from requests.structures import CaseInsensitiveDict
 import logging
 import logging.config
-
 from os import path
-log_file_path = path.join(path.dirname(path.abspath(__file__)), 'logger.config')
+
+log_file_path = path.join(path.dirname(path.abspath(__name__)), 'logger.config')
 logging.config.fileConfig(log_file_path)
 logger = logging.getLogger("DataVerify")
 
