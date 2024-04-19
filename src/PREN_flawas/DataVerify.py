@@ -26,7 +26,7 @@ def sendStatus(url, token):
     headers["Content-Type"] = "application/json"
     headers["Auth"] = token
     resp  = requests.post(url, headers=headers)
-    logging.debug("sendStatus" + resp.content)
+    logging.debug("sendStatus" + str(resp.content))
     if resp.status_code == 204:
         logging.debug("sendStatus replied status OK")
         return True
