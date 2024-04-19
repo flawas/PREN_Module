@@ -1,9 +1,14 @@
 import os, sys, logging, time
+import logging
+import logging.config
 from waveshare_epd import epd1in54_V2
 from PIL import Image, ImageDraw, ImageFont
 
+logging.config.fileConfig('logger.conf')
+logger = logging.getLogger("Display")
+
 def __init__(epd, fontTTC, backgroundBMP ):
-    logging.info("Display init")
+    logging.debug("Display init")
     font = ImageFont.truetype(os.path.join(fontTTC), 16)
     epd.init(1)
     background = Image.open(os.path.join(backgroundBMP))
@@ -11,9 +16,10 @@ def __init__(epd, fontTTC, backgroundBMP ):
 
     # epd.init(1) # into partial refresh mode
     ImageDraw.Draw(background)
+    logging.debug("Display init done")
 
 def clearDisplay(epd):
-    logging.info("Display clear")
+    logging.debug("Display clear")
     try:
         epd.init(0)
         epd.Clear(0xFF)
@@ -29,7 +35,7 @@ def clearDisplay(epd):
         exit()
 
 def drawPicture(epd, picture):
-    logging.info("Display draw picture")
+    logging.debug("Display draw picture")
     try:
         epd.init(0)
         image = Image.open(os.path.join(picture))
@@ -45,13 +51,13 @@ def drawPicture(epd, picture):
         exit()
 
 def shutdownDisplay(epd):
-    logging.info("Display shutdown")
+    logging.debug("Display shutdown")
     epd.init(0)
     epd.Clear(0xFF)
     epd.sleep()
 
 def drawInitialDisplay(epd, background, backgroundmodified, font):
-    logging.info("Display draw initial display")
+    logging.debug("Display draw initial display")
     try:
         updateDisplay(epd, 10, 10, 'PREN TEAM 33', background, backgroundmodified, font)
         # self.updateDisplay(10, 30, 'Initialisierung')
@@ -91,7 +97,7 @@ def updateDisplay(epd, x, y, text, backgroundBMP, backgroundModified, font):
         epd.displayPart(epd.getbuffer(background))
 
         background.save("pic/background_modified.bmp")
-
+        logging.debug("Display updated with text: " + text)
 
     except IOError as e:
         logging.error(e)

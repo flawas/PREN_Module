@@ -1,7 +1,13 @@
 import json, time
 import sys
+import logging
+import logging.config
 
 import RPi.GPIO as GPIO
+
+logging.config.fileConfig('logger.conf')
+logger = logging.getLogger("Engine")
+
 
 __config = {
     "Solenoid": [
@@ -64,38 +70,38 @@ def setup():
     GPIO.setup(__config["Inputs"][0]["Start"], GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(__config["Inputs"][0]["EmergencyStop"], GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-    GPIO.add_event_detect(__config["Inputs"][0]["Start"], GPIO.RISING, callback=button_start_callback, bouncetime=100)
-    GPIO.add_event_detect(__config["Inputs"][0]["EmergencyStop"], GPIO.FALLING, callback=button_pressed_callback,
+    GPIO.add_event_detect(__config["Inputs"][0]["Start"], GPIO.FALLING, callback=button_start_callback, bouncetime=100)
+    GPIO.add_event_detect(__config["Inputs"][0]["EmergencyStop"], GPIO.RISING, callback=button_pressed_callback,
                           bouncetime=100)
     PiezoPin = GPIO.PWM(__config["Piezo"][0]["GIPO"], 100)
-
+    logging.debug("Engine setup done")
 
 def wait_startButton():
     while True:
         if GPIO.event_detected(__config["Inputs"][0]["Start"]):
             break
         else:
-            print("Warten für Startknopf")
+            logging.info("Warten für Startknopf")
             time.sleep(1)
 
 
 def wait_emergencyButton():
     while True:
         if __config["Inputs"][0]["EmergencyPressed"]:
-            print("EmergencyButton gedrückt")
+            logging.warning("EmergencyButton gedrückt")
             sys.exit(0)
-            print("Alle Prozesse beendet")
+            logging.info("Alle Prozesse beendet")
         else:
-            print("EmergencyButton OK")
+            logging.debug("EmergencyButton OK")
             time.sleep(0.5)
 
 
 def button_start_callback(channel):
-    print("Startknopf betätigt")
+    logging.info("Startknopf betätigt")
 
 
 def button_pressed_callback(channel):
-    print("Emergency pressed")
+    logging.warning("Emergency pressed")
     # GPIO.output(__AllActors, GPIO.LOW)
     __config["Inputs"][0]["EmergencyPressed"] = True
     # ->Rückmeldung für Display
@@ -110,7 +116,7 @@ def turnRight():
         time.sleep(__config["Stepperengine"][0]["DelaySteps"])
         GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.LOW)
     GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.HIGH)
-    print("Turn right")
+    logging.debug("Turn right")
     # incrementPosition()
 
 
@@ -123,7 +129,7 @@ def turnLeft():
         time.sleep(__config["Stepperengine"][0]["DelaySteps"])
         GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.LOW)
     GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.HIGH)
-    print("Turn left")
+    logging.debug("Turn left")
     # Todo: Decrement function
 
 
@@ -154,32 +160,32 @@ def solYellow():
     GPIO.output(__config["Solenoid"][0]["Yellow"], GPIO.HIGH)
     time.sleep(__config["Solenoid"][1]["DelayColors"])
     GPIO.output(__config["Solenoid"][0]["Yellow"], GPIO.LOW)
-    print("Gelber Würfel gestossen")
+    logging.info("Gelber Würfel gestossen")
 
 
 def solRed():
     GPIO.output(__config["Solenoid"][0]["Red"], GPIO.HIGH)
     time.sleep(__config["Solenoid"][1]["DelayColors"])
     GPIO.output(__config["Solenoid"][0]["Red"], GPIO.LOW)
-    print("Roter Würfel gestossen")
+    logging.info("Roter Würfel gestossen")
 
 
 def solBlue():
     GPIO.output(__config["Solenoid"][0]["Blue"], GPIO.HIGH)
     time.sleep(__config["Solenoid"][1]["DelayColors"])
     GPIO.output(__config["Solenoid"][0]["Blue"], GPIO.LOW)
-    print("Blauer Würfel gestossen")
+    logging.info("Blauer Würfel gestossen")
 
 
 def solWeight():
     GPIO.output(__config["Solenoid"][0]["Weight"], GPIO.HIGH)
     time.sleep(__config["Solenoid"][1]["DelayWeight"])
     GPIO.output(__config["Solenoid"][0]["Weight"], GPIO.LOW)
-    print("Gewicht losgelassen")
+    logging.info("Gewicht losgelassen")
 
 
 def piezo():
     GPIO.output(__config["Piezo"][0]["GIPO"], GPIO.HIGH)
     time.sleep(0.5)
     GPIO.output(__config["Piezo"][0]["GIPO"], GPIO.LOW)
-    print("Piezo tönt")
+    logging.info("Piezo tönt")

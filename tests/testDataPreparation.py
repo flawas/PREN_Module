@@ -1,9 +1,11 @@
 import json
 import unittest
 from time import gmtime, strftime
+from unittest import TestCase
+
 from src.PREN_flawas import DataPreparation
 
-class testDataPreparation(unittest.TestCase):
+class testDataSend(unittest.TestCase):
     def testSetPos1(self):
         DataPreparation.setPos(1, "Blue")
         self.assertEqual("Blue", DataPreparation.getPos(1))
