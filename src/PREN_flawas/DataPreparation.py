@@ -2,6 +2,7 @@ import json
 from time import gmtime, strftime
 import logging
 import logging.config
+from os import path
 
 __cube = {
     1: "",
@@ -14,7 +15,10 @@ __cube = {
     8: ""
 }
 
-logging.config.fileConfig('logger.conf')
+
+log_file_path = path.join(path.dirname(path.abspath(__file__)), 'logger.config')
+logging.config.fileConfig(log_file_path)
+logging.config.fileConfig(log_file_path)
 logger = logging.getLogger("DataPreparation")
 
 def setPos(int, value):

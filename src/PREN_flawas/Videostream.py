@@ -4,7 +4,9 @@ import time, datetime
 import logging
 import logging.config
 
-logging.config.fileConfig('logger.conf')
+from os import path
+log_file_path = path.join(path.dirname(path.abspath(__file__)), 'logger.config')
+logging.config.fileConfig(log_file_path)
 logger = logging.getLogger("Engine")
 
 __max = {
