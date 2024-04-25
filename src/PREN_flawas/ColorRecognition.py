@@ -29,7 +29,7 @@ def getColors(screenshotNumber, screenshot):
     yellow_mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
 
     lower_blue = np.array([60, 240, 160])
-    upper_blue = np.array([70, 260, 202])
+    upper_blue = np.array([117, 260, 202])
     blue_mask = cv2.inRange(hsv, lower_blue, upper_blue)
 
     lower_red = np.array([135, 210, 160])
@@ -122,4 +122,5 @@ def getColors(screenshotNumber, screenshot):
             __cube[4] = 'Red'
 
 def getResult():
+    logging.info("getResult: " + str(__cube))
     return __cube
