@@ -1,5 +1,12 @@
 import numpy as np
 import cv2
+import logging
+import logging.config
+from os import path
+
+log_file_path = path.join(path.dirname(path.abspath(__name__)), 'logger.config')
+logging.config.fileConfig(log_file_path)
+logger = logging.getLogger("ColorRecognition")
 
 __cube = {
     1: "",
@@ -45,7 +52,7 @@ def getColors(screenshotNumber, screenshot):
     roi_above_right = hsv[85:120, 670:710]
     average_color_above_right = np.mean(roi_above_right, axis=(0, 1))
 
-    print(average_color_bottom_left)
+    logging.debug("average_color_bottom_left " + str(average_color_bottom_left))
 
     if (average_color_bottom_left >= lower_yellow).all() and (average_color_bottom_left <= upper_yellow).all():
         if (screenshotNumber == 1):
@@ -62,7 +69,7 @@ def getColors(screenshotNumber, screenshot):
             __cube[1] = 'Red'
         if (screenshotNumber == 2):
             __cube[5] = 'Red'
-    print(average_color_bottom_right)
+    logging.debug("average_color_bottom_right " + str(average_color_bottom_right))
 
     if (average_color_bottom_right >= lower_yellow).all() and (average_color_bottom_right <= upper_yellow).all():
         if (screenshotNumber == 1):
@@ -79,8 +86,7 @@ def getColors(screenshotNumber, screenshot):
             __cube[2] = 'Red'
         if (screenshotNumber == 2):
             __cube[6] = 'Red'
-
-    print(average_color_above_left)
+    logging.debug("average_color_above_left " + str(average_color_above_left))
 
     if (average_color_above_left >= lower_yellow).all() and (average_color_above_left <= upper_yellow).all():
         if (screenshotNumber == 1):
@@ -97,8 +103,7 @@ def getColors(screenshotNumber, screenshot):
             __cube[7] = 'Red'
         if (screenshotNumber == 2):
             __cube[3] = 'Red'
-
-    print(average_color_above_right)
+    logging.debug("average_color_above_right " + str(average_color_above_right))
 
     if (average_color_above_right >= lower_yellow).all() and (average_color_above_right <= upper_yellow).all():
         if (screenshotNumber == 1):
