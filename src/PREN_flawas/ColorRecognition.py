@@ -115,3 +115,6 @@ def getColors(screenshotNumber, screenshot):
             __cube[8] = 'Red'
         if (screenshotNumber == 2):
             __cube[4] = 'Red'
+
+def getResult():
+    return __cube
