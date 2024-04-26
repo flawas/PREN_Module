@@ -6,7 +6,7 @@ from os import path
 
 
 log_file_path = path.join(path.dirname(path.abspath(__name__)), 'logger.config')
-logging.config.fileConfig(log_file_path)
+#logging.config.fileConfig(log_file_path)
 logger = logging.getLogger("DataSend")
 
 def checkAvailability(url):
@@ -40,12 +40,11 @@ def sendData(url, token, config):
     headers = CaseInsensitiveDict()
     headers["Content-Type"] = "application/json"
     headers["Auth"] = token
-
-    resp = requests.post(url, headers=headers, data=config)
+    data = json.dumps(config)
+    resp = requests.post(url, headers=headers, data=data)
     if resp.status_code == 204 or resp.status_code == 200 or resp.status_code == 201:
         logging.debug("sendData replied status OK")
         return True
     else:
         logging.error("sendData something went wrong")
         return False
-
