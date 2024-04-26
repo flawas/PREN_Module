@@ -4,9 +4,9 @@ import logging
 import logging.config
 from os import path
 
-log_file_path = path.join(path.dirname(path.abspath(__name__)), 'logger.config')
-logging.config.fileConfig(log_file_path)
-logger = logging.getLogger("DataVerify")
+from time import gmtime, strftime
+
+
 
 def checkAvailability(url):
     payload = {}
@@ -35,17 +35,17 @@ def sendStatus(url, token):
         return False
 
 
-def sendData(url, token, time, config):
+def sendData(url, token, config):
+
     headers = CaseInsensitiveDict()
     headers["Content-Type"] = "application/json"
     headers["Auth"] = token
-    data = {"time": time,
-            "config": config}
-    logging.debug("sendData" + json.dumps(data))
+
     resp = requests.post(url, headers=headers, data=config)
-    if resp.status_code == 200:
+    if resp.status_code == 204 or resp.status_code == 200 or resp.status_code == 201:
         logging.debug("sendData replied status OK")
         return True
     else:
-        logging.debug("sendData something went wrong")
+        logging.error("sendData something went wrong")
         return False
+
