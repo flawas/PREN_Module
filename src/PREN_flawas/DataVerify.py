@@ -5,9 +5,9 @@ import logging.config
 from os import path
 
 
-log_file_path = path.join(path.dirname(path.abspath(__name__)), 'logger.config')
-logging.config.fileConfig(log_file_path)
-logger = logging.getLogger("DataSend")
+#log_file_path = path.join(path.dirname(path.abspath(__name__)), 'logger.config')
+#logging.config.fileConfig(log_file_path)
+#logger = logging.getLogger("DataSend")
 
 def checkAvailability(url):
     payload = {}
@@ -40,11 +40,12 @@ def sendData(url, token, config):
     headers = CaseInsensitiveDict()
     headers["Content-Type"] = "application/json"
     headers["Auth"] = token
-    data = json.dumps(config)
-    resp = requests.post(url, headers=headers, data=data)
+    resp = requests.post(url, headers=headers, data=config)
     if resp.status_code == 204 or resp.status_code == 200 or resp.status_code == 201:
         logging.debug("sendData replied status OK")
+        logging.info(resp.content)
         return True
     else:
         logging.error("sendData something went wrong")
+        logging.error(resp.content)
         return False
