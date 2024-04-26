@@ -6,7 +6,7 @@ from os import path
 
 
 log_file_path = path.join(path.dirname(path.abspath(__name__)), 'logger.config')
-#logging.config.fileConfig(log_file_path)
+logging.config.fileConfig(log_file_path)
 logger = logging.getLogger("DataSend")
 
 def checkAvailability(url):
