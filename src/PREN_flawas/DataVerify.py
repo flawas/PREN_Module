@@ -4,9 +4,10 @@ import logging
 import logging.config
 from os import path
 
-from time import gmtime, strftime
 
-
+log_file_path = path.join(path.dirname(path.abspath(__name__)), 'logger.config')
+logging.config.fileConfig(log_file_path)
+logger = logging.getLogger("DataSend")
 
 def checkAvailability(url):
     payload = {}
@@ -36,7 +37,6 @@ def sendStatus(url, token):
 
 
 def sendData(url, token, config):
-
     headers = CaseInsensitiveDict()
     headers["Content-Type"] = "application/json"
     headers["Auth"] = token
