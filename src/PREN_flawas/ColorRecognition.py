@@ -201,6 +201,9 @@ __cube = {
     8: ""
 }
 
+def getResult():
+    return __cube
+
 
 def getColors(screenshotNumber, screenshot):
     frame = cv2.imread(screenshot)
