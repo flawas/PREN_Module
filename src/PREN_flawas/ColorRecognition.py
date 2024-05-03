@@ -19,7 +19,7 @@ def open_camera_profile(ip_address, username, password, profile, screenshotName)
                            password +
                            '@' + ip_address + '/axis-media/media.amp' + '?streamprofile=' + profile)
     if cap is None or not cap.isOpened():
-        print('Warning: unable to open video source: ', ip_address)
+        logging.error('Warning: unable to open video source: ', ip_address)
         return None
     lower_white = np.array([126, 170, 107])
     upper_white = np.array([170, 210, 144])
@@ -123,7 +123,7 @@ def open_camera_profile(ip_address, username, password, profile, screenshotName)
         #cv2.imshow('frame', frame)
 
         if not ret:
-            print('Warning: unable to read next frame')
+            logging.error('Warning: unable to read next frame')
             break
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -139,13 +139,13 @@ def writeScreenshot(ip_address, username, password, profile, screenshotName):
                            password +
                            '@' + ip_address + '/axis-media/media.amp' + '?streamprofile=' + profile)
     if cap is None or not cap.isOpened():
-        print('Warning: unable to open video source: ', ip_address)
+        logging.error('Warning: unable to open video source: ', ip_address)
         return None
     ret, frame = cap.read()
 
     cv2.imwrite(screenshotName + ".png", frame)
     cv2.destroyAllWindows()
-    print(str(screenshotName) + ".png erstellt.")
+    logging.info(str(screenshotName) + ".png erstellt.")
 
 
 def getPosPlate():
@@ -237,7 +237,7 @@ def getColors(screenshotNumber, screenshot):
     cv2.rectangle(hsv, (650, 100), (700, 150), (255, 255, 255), 3)
     roi_above_right = hsv[85:120, 665:720]
     average_color_above_right = np.mean(roi_above_right, axis=(0, 1))
-    print("average_color_bottom_left" + str(average_color_bottom_left))
+    logging.debug("average_color_bottom_left" + str(average_color_bottom_left))
 
     if (average_color_bottom_left >= lower_yellow).all() and (average_color_bottom_left <= upper_yellow).all():
         if (screenshotNumber == 1):
@@ -260,7 +260,7 @@ def getColors(screenshotNumber, screenshot):
             __cube[2] = 'Blue'  # Kann weggelassen werden, da bereits SC1 erkann
         if (screenshotNumber == 3):
             __cube[5] = 'Blue'  # Kann weggelassen werden, da bereits SC2 erkann
-    print("average_color_bottom_right" + str(average_color_bottom_right))
+    logging.debug("average_color_bottom_right" + str(average_color_bottom_right))
 
     if (average_color_bottom_right >= lower_yellow).all() and (average_color_bottom_right <= upper_yellow).all():
         if (screenshotNumber == 1):
@@ -283,7 +283,7 @@ def getColors(screenshotNumber, screenshot):
             __cube[5] = 'Blue'
         if (screenshotNumber == 3):
             __cube[6] = 'Blue'
-    print("average_color_above_left" + str(average_color_above_left))
+    logging.debug("average_color_above_left" + str(average_color_above_left))
 
     if (average_color_above_left >= lower_yellow).all() and (average_color_above_left <= upper_yellow).all():
         if (screenshotNumber == 1):
@@ -306,7 +306,7 @@ def getColors(screenshotNumber, screenshot):
             __cube[4] = 'Blue'
         if (screenshotNumber == 3):
             __cube[3] = 'Blue'
-    print("average_color_above_right" + str(average_color_above_right))
+    logging.debug("average_color_above_right" + str(average_color_above_right))
 
     if (average_color_above_right >= lower_yellow).all() and (average_color_above_right <= upper_yellow).all():
         if (screenshotNumber == 1):
