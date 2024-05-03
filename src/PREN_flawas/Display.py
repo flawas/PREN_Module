@@ -65,7 +65,7 @@ def drawInitialDisplay(epd, background, backgroundmodified, font):
         # self.updateDisplay(10, 30, 'Initialisierung')
         updateDisplay(epd, 10, 80, 'Beanspruchte Zeit', background, backgroundmodified, font)
         # self.updateDisplay(10, 100, 'Sekunden')
-        updateDisplay(epd, 10, 150, 'Stromverbrauch', background, backgroundmodified, font)
+        updateDisplay(epd, 10, 150, 'Energieverbrauch', background, backgroundmodified, font)
         # self.updateDisplay(10, 170, 'kW')
 
     except IOError as e:
