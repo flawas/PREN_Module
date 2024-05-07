@@ -86,7 +86,7 @@ def open_camera_profile(ip_address, username, password, profile, screenshotName)
                 average_color_bot_left_left >= lower_white).all() and (
                 average_color_bot_left_left <= upper_white).all():
             cap.release()
-            __pos[0] = "A"
+            __pos[0] = 1
             cv2.imwrite(screenshotName + ".png", frame)
             return True
 
@@ -97,7 +97,7 @@ def open_camera_profile(ip_address, username, password, profile, screenshotName)
                 average_color_bot_right_right >= lower_white_right).all() and (
                 average_color_bot_right_right <= upper_white_right).all():
             cap.release()
-            __pos[0] = "B"
+            __pos[0] = 2
             cv2.imwrite(screenshotName + ".png", frame)
             return True
 
@@ -106,7 +106,7 @@ def open_camera_profile(ip_address, username, password, profile, screenshotName)
                 average_color_top_mid_left >= lower_white).all() and (
                 average_color_top_mid_left <= upper_white).all() and (average_color_bot_left_left <= lower_white).all():
             cap.release()
-            __pos[0] = "C"
+            __pos[0] = 3
             cv2.imwrite(screenshotName + ".png", frame)
             return True
 
@@ -116,7 +116,7 @@ def open_camera_profile(ip_address, username, password, profile, screenshotName)
                 average_color_top_mid_right <= upper_white).all():
             cap.release()
             cv2.imwrite(screenshotName + ".png", frame)
-            __pos[0] = "D"
+            __pos[0] = 4
             return True
 
         # Zur Entwicklung: Frame anzeigen
