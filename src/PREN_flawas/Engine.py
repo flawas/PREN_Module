@@ -27,8 +27,7 @@ __config = {
             "Enable": 6,
             "Direction": 5,
             "Step": 13,
-            #"DelaySteps": 0.0005,
-            "DelaySteps": 1,
+            "DelaySteps": 0.0005,
             "NumberOfSteps": 800
         }
     ],
@@ -119,7 +118,7 @@ def turnRight():
         GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.LOW)
     GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.HIGH)
     logging.debug("Turn right")
-    # incrementPosition()
+    time.sleep(0.5)
 
 
 def turnLeft():
@@ -132,7 +131,7 @@ def turnLeft():
         GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.LOW)
     GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.HIGH)
     logging.debug("Turn left")
-    # Todo: Decrement function
+    time.sleep(0.5)
 
 
 def incrementPosition():
