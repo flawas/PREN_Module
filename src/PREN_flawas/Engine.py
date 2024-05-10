@@ -91,6 +91,9 @@ def wait_emergencyButton():
         if __config["Inputs"][0]["EmergencyPressed"]:
             logging.warning("EmergencyButton gedrückt")
             piezo()
+            time.sleep(0.5)
+            piezo()
+            time.sleep(0.5)
             piezo()
             sys.exit(0)
             logging.info("Alle Prozesse beendet")
