@@ -27,7 +27,8 @@ __config = {
             "Enable": 6,
             "Direction": 5,
             "Step": 13,
-            "DelaySteps": 0.0005,
+            #"DelaySteps": 0.0005,
+            "DelaySteps": 1,
             "NumberOfSteps": 800
         }
     ],
