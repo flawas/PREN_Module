@@ -242,24 +242,24 @@ def getColors(screenshotNumber, screenshot):
     if (average_color_bottom_left >= lower_yellow).all() and (average_color_bottom_left <= upper_yellow).all():
         if (screenshotNumber == 1):
             __cube[1] = 'Yellow'
-        if (screenshotNumber == 2):
-            __cube[2] = 'Yellow'  # Kann weggelassen werden, da bereits SC1 erkann
-        if (screenshotNumber == 3):
-            __cube[5] = 'Yellow'  # Kann weggelassen werden, da bereits SC2 erkann
+        #if (screenshotNumber == 2):
+            #__cube[2] = 'Yellow'  # Kann weggelassen werden, da bereits SC1 erkann
+        #if (screenshotNumber == 3):
+            #__cube[5] = 'Yellow'  # Kann weggelassen werden, da bereits SC2 erkann
     if (average_color_bottom_left >= lower_red).all() and (average_color_bottom_left <= upper_red).all():
         if (screenshotNumber == 1):
             __cube[1] = 'Red'
-        if (screenshotNumber == 2):
-            __cube[2] = 'Red'  # Kann weggelassen werden, da bereits SC1 erkannt
-        if (screenshotNumber == 3):
-            __cube[5] = 'Red'  # Kann weggelassen werden, da bereits SC2 erkann
+        #if (screenshotNumber == 2):
+            #__cube[2] = 'Red'  # Kann weggelassen werden, da bereits SC1 erkannt
+        #if (screenshotNumber == 3):
+            #__cube[5] = 'Red'  # Kann weggelassen werden, da bereits SC2 erkann
     if (average_color_bottom_left >= lower_blue).all() and (average_color_bottom_left <= upper_blue).all():
         if (screenshotNumber == 1):
             __cube[1] = 'Blue'
-        if (screenshotNumber == 2):
-            __cube[2] = 'Blue'  # Kann weggelassen werden, da bereits SC1 erkann
-        if (screenshotNumber == 3):
-            __cube[5] = 'Blue'  # Kann weggelassen werden, da bereits SC2 erkann
+        #if (screenshotNumber == 2):
+            #__cube[2] = 'Blue'  # Kann weggelassen werden, da bereits SC1 erkann
+        #if (screenshotNumber == 3):
+            #__cube[5] = 'Blue'  # Kann weggelassen werden, da bereits SC2 erkann
     logging.debug("average_color_bottom_right" + str(average_color_bottom_right))
 
     if (average_color_bottom_right >= lower_yellow).all() and (average_color_bottom_right <= upper_yellow).all():
@@ -311,21 +311,21 @@ def getColors(screenshotNumber, screenshot):
     if (average_color_above_right >= lower_yellow).all() and (average_color_above_right <= upper_yellow).all():
         if (screenshotNumber == 1):
             __cube[8] = 'Yellow'
-        if (screenshotNumber == 2):
-            __cube[7] = 'Yellow'  # Kann weggelassen werden, da bereits SC1 erkann
-        if (screenshotNumber == 3):
-            __cube[4] = 'Yellow'  # Kann weggelassen werden, da bereits SC2 erkann
+        #if (screenshotNumber == 2):
+            #__cube[7] = 'Yellow'  # Kann weggelassen werden, da bereits SC1 erkann
+        #if (screenshotNumber == 3):
+            #__cube[4] = 'Yellow'  # Kann weggelassen werden, da bereits SC2 erkann
     if (average_color_above_right >= lower_red).all() and (average_color_above_right <= upper_red).all():
         if (screenshotNumber == 1):
             __cube[8] = 'Red'
-        if (screenshotNumber == 2):
-            __cube[7] = 'Red'  # Kann weggelassen werden, da bereits SC1 erkann
-        if (screenshotNumber == 3):
-            __cube[4] = 'Red'  # Kann weggelassen werden, da bereits SC2 erkann
+        #if (screenshotNumber == 2):
+            #__cube[7] = 'Red'  # Kann weggelassen werden, da bereits SC1 erkann
+        #if (screenshotNumber == 3):
+            #__cube[4] = 'Red'  # Kann weggelassen werden, da bereits SC2 erkann
     if (average_color_above_right >= lower_blue).all() and (average_color_above_right <= upper_blue).all():
         if (screenshotNumber == 1):
             __cube[8] = 'Blue'
-        if (screenshotNumber == 2):
-            __cube[7] = 'Blue'  # Kann weggelassen werden, da bereits SC1 erkann
-        if (screenshotNumber == 3):
-            __cube[4] = 'Blue'  # Kann weggelassen werden, da bereits SC2 erkann
+        #if (screenshotNumber == 2):
+            #__cube[7] = 'Blue'  # Kann weggelassen werden, da bereits SC1 erkann
+        #if (screenshotNumber == 3):
+            #__cube[4] = 'Blue'  # Kann weggelassen werden, da bereits SC2 erkann
