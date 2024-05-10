@@ -292,14 +292,14 @@ def getColors(screenshotNumber, screenshot):
             __cube[4] = 'Yellow'
         if (screenshotNumber == 3):
             __cube[3] = 'Yellow'
-    if (average_color_above_left >= lower_blue).all() and (average_color_above_left <= upper_blue).all():
+    if (average_color_above_left >= lower_red).all() and (average_color_above_left <= upper_red).all():
         if (screenshotNumber == 1):
             __cube[7] = 'Red'
         if (screenshotNumber == 2):
             __cube[4] = 'Red'
         if (screenshotNumber == 3):
             __cube[3] = 'Red'
-    if (average_color_above_left >= lower_red).all() and (average_color_above_left <= upper_red).all():
+    if (average_color_above_left >= lower_blue).all() and (average_color_above_left <= upper_blue).all():
         if (screenshotNumber == 1):
             __cube[7] = 'Blue'
         if (screenshotNumber == 2):
@@ -315,14 +315,14 @@ def getColors(screenshotNumber, screenshot):
             __cube[7] = 'Yellow'  # Kann weggelassen werden, da bereits SC1 erkann
         if (screenshotNumber == 3):
             __cube[4] = 'Yellow'  # Kann weggelassen werden, da bereits SC2 erkann
-    if (average_color_above_right >= lower_blue).all() and (average_color_above_right <= upper_blue).all():
+    if (average_color_above_right >= lower_red).all() and (average_color_above_right <= upper_red).all():
         if (screenshotNumber == 1):
             __cube[8] = 'Red'
         if (screenshotNumber == 2):
             __cube[7] = 'Red'  # Kann weggelassen werden, da bereits SC1 erkann
         if (screenshotNumber == 3):
             __cube[4] = 'Red'  # Kann weggelassen werden, da bereits SC2 erkann
-    if (average_color_above_right >= lower_red).all() and (average_color_above_right <= upper_red).all():
+    if (average_color_above_right >= lower_blue).all() and (average_color_above_right <= upper_blue).all():
         if (screenshotNumber == 1):
             __cube[8] = 'Blue'
         if (screenshotNumber == 2):
