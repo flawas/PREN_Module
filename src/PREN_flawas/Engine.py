@@ -90,6 +90,8 @@ def wait_emergencyButton():
     while True:
         if __config["Inputs"][0]["EmergencyPressed"]:
             logging.warning("EmergencyButton gedrückt")
+            piezo()
+            piezo()
             sys.exit(0)
             logging.info("Alle Prozesse beendet")
         else:
@@ -109,80 +111,62 @@ def button_pressed_callback(channel):
 
 
 def turnRight():
-    GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.LOW)
-    time.sleep(0.01)
-    for i in range(__config["Stepperengine"][0]["NumberOfSteps"]):
-        GPIO.output(__config["Stepperengine"][0]["Direction"], GPIO.LOW)
-        GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.HIGH)
-        time.sleep(__config["Stepperengine"][0]["DelaySteps"])
-        GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.LOW)
-    GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.HIGH)
-    logging.debug("Turn right")
-    time.sleep(0.5)
+    if __config["Inputs"][0]["EmergencyPressed"] == False:
+        GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.LOW)
+        time.sleep(0.01)
+        for i in range(__config["Stepperengine"][0]["NumberOfSteps"]):
+            GPIO.output(__config["Stepperengine"][0]["Direction"], GPIO.LOW)
+            GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.HIGH)
+            time.sleep(__config["Stepperengine"][0]["DelaySteps"])
+            GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.LOW)
+        GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.HIGH)
+        logging.debug("Turn right")
+        time.sleep(0.5)
 
 
 def turnLeft():
-    GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.LOW)
-    time.sleep(0.01)
-    for x in range(__config["Stepperengine"][0]["NumberOfSteps"]):
-        GPIO.output(__config["Stepperengine"][0]["Direction"], GPIO.HIGH)
-        GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.HIGH)
-        time.sleep(__config["Stepperengine"][0]["DelaySteps"])
-        GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.LOW)
-    GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.HIGH)
-    logging.debug("Turn left")
-    time.sleep(0.5)
-
-
-def incrementPosition():
-    if __pos["Yellow"] == 4:
-        __pos["Yellow"] = 1
-    else:
-        __pos["Yellow"] = __pos["Yellow"] + 1
-    if __pos["Red"] == 4:
-        __pos["Red"] = 1
-    else:
-        __pos["Red"] = __pos["Red"] + 1
-    if __pos["Blue"] == 4:
-        __pos["Blue"] = 1
-    else:
-        __pos["Blue"] = __pos["Blue"] + 1
-
-
-def getIncrementPos(colorName):
-    if colorName == "Blue":
-        return __pos["Blue"]
-    if colorName == "Red":
-        return __pos["Red"]
-    if colorName == "Yellow":
-        return __pos["Yellow"]
+    if __config["Inputs"][0]["EmergencyPressed"] == False:
+        GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.LOW)
+        time.sleep(0.01)
+        for x in range(__config["Stepperengine"][0]["NumberOfSteps"]):
+            GPIO.output(__config["Stepperengine"][0]["Direction"], GPIO.HIGH)
+            GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.HIGH)
+            time.sleep(__config["Stepperengine"][0]["DelaySteps"])
+            GPIO.output(__config["Stepperengine"][0]["Step"], GPIO.LOW)
+        GPIO.output(__config["Stepperengine"][0]["Enable"], GPIO.HIGH)
+        logging.debug("Turn left")
+        time.sleep(0.5)
 
 def solYellow():
-    GPIO.output(__config["Solenoid"][0]["Yellow"], GPIO.HIGH)
-    time.sleep(__config["Solenoid"][1]["DelayColors"])
-    GPIO.output(__config["Solenoid"][0]["Yellow"], GPIO.LOW)
-    logging.info("Gelber Würfel gestossen")
+    if __config["Inputs"][0]["EmergencyPressed"] == False:
+        GPIO.output(__config["Solenoid"][0]["Yellow"], GPIO.HIGH)
+        time.sleep(__config["Solenoid"][1]["DelayColors"])
+        GPIO.output(__config["Solenoid"][0]["Yellow"], GPIO.LOW)
+        logging.info("Gelber Würfel gestossen")
 
 
 def solRed():
-    GPIO.output(__config["Solenoid"][0]["Red"], GPIO.HIGH)
-    time.sleep(__config["Solenoid"][1]["DelayColors"])
-    GPIO.output(__config["Solenoid"][0]["Red"], GPIO.LOW)
-    logging.info("Roter Würfel gestossen")
+    if __config["Inputs"][0]["EmergencyPressed"] == False:
+        GPIO.output(__config["Solenoid"][0]["Red"], GPIO.HIGH)
+        time.sleep(__config["Solenoid"][1]["DelayColors"])
+        GPIO.output(__config["Solenoid"][0]["Red"], GPIO.LOW)
+        logging.info("Roter Würfel gestossen")
 
 
 def solBlue():
-    GPIO.output(__config["Solenoid"][0]["Blue"], GPIO.HIGH)
-    time.sleep(__config["Solenoid"][1]["DelayColors"])
-    GPIO.output(__config["Solenoid"][0]["Blue"], GPIO.LOW)
-    logging.info("Blauer Würfel gestossen")
+    if __config["Inputs"][0]["EmergencyPressed"] == False:
+        GPIO.output(__config["Solenoid"][0]["Blue"], GPIO.HIGH)
+        time.sleep(__config["Solenoid"][1]["DelayColors"])
+        GPIO.output(__config["Solenoid"][0]["Blue"], GPIO.LOW)
+        logging.info("Blauer Würfel gestossen")
 
 
 def solWeight():
-    GPIO.output(__config["Solenoid"][0]["Weight"], GPIO.HIGH)
-    time.sleep(__config["Solenoid"][1]["DelayWeight"])
-    GPIO.output(__config["Solenoid"][0]["Weight"], GPIO.LOW)
-    logging.info("Gewicht losgelassen")
+    if __config["Inputs"][0]["EmergencyPressed"] == False:
+        GPIO.output(__config["Solenoid"][0]["Weight"], GPIO.HIGH)
+        time.sleep(__config["Solenoid"][1]["DelayWeight"])
+        GPIO.output(__config["Solenoid"][0]["Weight"], GPIO.LOW)
+        logging.info("Gewicht losgelassen")
 
 
 def piezo():

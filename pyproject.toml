@@ -7,7 +7,7 @@ packages = ["src/PREN_flawas"]
 
 [project]
 name = "PREN_flawas"
-version = "0.0.57"
+version = "0.0.58"
 authors = [
   { name="Flavio Waser", email="waserflavio@gmail.com" },
 ]
