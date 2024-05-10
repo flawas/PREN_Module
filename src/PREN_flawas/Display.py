@@ -65,7 +65,7 @@ def drawInitialDisplay(epd, background, backgroundmodified, font):
         updateDisplay(epd, 10, 30, '', background, backgroundmodified, font)
 
         updateDisplay(epd, 10, 80, 'Beanspruchte Zeit', background, backgroundmodified, font)
-        updateDisplay(epd, 10, 80, '', background, backgroundmodified, font)
+        updateDisplay(epd, 10, 100, '', background, backgroundmodified, font)
 
         updateDisplay(epd, 10, 150, 'Energieverbrauch', background, backgroundmodified, font)
         updateDisplay(epd, 10, 170, '', background, backgroundmodified, font)
