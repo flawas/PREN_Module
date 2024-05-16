@@ -17,7 +17,7 @@ logger = logging.getLogger("DataSend")
 
 def send(url, time, energy):
     reply = requests.post(url=url, json={"time": time, "energy": energy})
-    logging.debug(reply.json())
+    logging.debug(reply)
     if reply.status_code == 200:
         return True
     else:
