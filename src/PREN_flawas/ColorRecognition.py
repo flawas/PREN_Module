@@ -353,6 +353,8 @@ def getColors(screenshotNumber, screenshot):
         if (screenshotNumber == 3):
             __cube[3] = 'Blue'
 
+    logging.debug("average_color_above" + str(average_color_above))
+
     if (average_color_bottom >= lower_yellow).all() and (average_color_bottom <= upper_yellow).all():
         if (screenshotNumber == 3):
             __cube[6] = 'Yellow'
@@ -364,3 +366,5 @@ def getColors(screenshotNumber, screenshot):
     if (average_color_bottom >= lower_blue).all() and (average_color_bottom <= upper_blue).all():
         if (screenshotNumber == 3):
             __cube[6] = 'Blue'
+
+    logging.debug("average_color_bottom" + str(average_color_bottom))
