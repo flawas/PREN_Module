@@ -19,7 +19,7 @@ __config = {
             "Weight": 23
         }, {
             "DelayColors": 1,
-            "DelayWeight": 0.02
+            "DelayWeight": 1
         }
     ],
     "Stepperengine": [
