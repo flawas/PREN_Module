@@ -209,8 +209,8 @@ def getColors(screenshotNumber, screenshot):
     frame = cv2.imread(screenshot)
     hsv = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
 
-    lower_red = np.array([130, 150, 140])
-    upper_red = np.array([160, 220, 255])
+    lower_red = np.array([130, 120, 140])
+    upper_red = np.array([165, 220, 255])
 
     lower_blue = np.array([3, 170, 130])
     upper_blue = np.array([89, 255, 255])
