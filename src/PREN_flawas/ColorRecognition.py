@@ -237,7 +237,17 @@ def getColors(screenshotNumber, screenshot):
     cv2.rectangle(hsv, (650, 100), (700, 150), (255, 255, 255), 3)
     roi_above_right = hsv[85:120, 665:720]
     average_color_above_right = np.mean(roi_above_right, axis=(0, 1))
-    logging.debug("average_color_bottom_left" + str(average_color_bottom_left))
+
+    cv2.rectangle(hsv, (505, 155), (540, 210), (255, 255, 255), 3)
+    roi_above = hsv[140:180, 520:560]
+    average_color_above = np.mean(roi_above, axis=(0,1))
+
+    pts = np.array([[230, 720], [180, 750], [200, 750], [270, 720]], np.int32)
+    pts = pts.reshape((-1, 1, 2))
+    mask = np.zeros(hsv.shape[:2], dtype=np.uint8)
+    cv2.fillPoly(mask, [pts], 255)
+    roi_bottom = cv2.mean(hsv, mask=mask)
+    average_color_bottom = np.array(roi_bottom[:3])
 
     if (average_color_bottom_left >= lower_yellow).all() and (average_color_bottom_left <= upper_yellow).all():
         if (screenshotNumber == 1):
@@ -260,53 +270,53 @@ def getColors(screenshotNumber, screenshot):
             #__cube[2] = 'Blue'  # Kann weggelassen werden, da bereits SC1 erkann
         #if (screenshotNumber == 3):
             #__cube[5] = 'Blue'  # Kann weggelassen werden, da bereits SC2 erkann
-    logging.debug("average_color_bottom_right" + str(average_color_bottom_right))
+    logging.debug("average_color_bottom_left" + str(average_color_bottom_left))
 
     if (average_color_bottom_right >= lower_yellow).all() and (average_color_bottom_right <= upper_yellow).all():
         if (screenshotNumber == 1):
             __cube[2] = 'Yellow'
         if (screenshotNumber == 2):
             __cube[5] = 'Yellow'
-        if (screenshotNumber == 3):
-            __cube[6] = 'Yellow'
+        #if (screenshotNumber == 3):
+            #__cube[6] = 'Yellow'
     if (average_color_bottom_right >= lower_red).all() and (average_color_bottom_right <= upper_red).all():
         if (screenshotNumber == 1):
             __cube[2] = 'Red'
         if (screenshotNumber == 2):
             __cube[5] = 'Red'
-        if (screenshotNumber == 3):
-            __cube[6] = 'Red'
+        #if (screenshotNumber == 3):
+            #__cube[6] = 'Red'
     if (average_color_bottom_right >= lower_blue).all() and (average_color_bottom_right <= upper_blue).all():
         if (screenshotNumber == 1):
             __cube[2] = 'Blue'
         if (screenshotNumber == 2):
             __cube[5] = 'Blue'
-        if (screenshotNumber == 3):
-            __cube[6] = 'Blue'
-    logging.debug("average_color_above_left" + str(average_color_above_left))
+        #if (screenshotNumber == 3):
+            #__cube[6] = 'Blue'
+    logging.debug("average_color_bottom_right" + str(average_color_bottom_right))
 
     if (average_color_above_left >= lower_yellow).all() and (average_color_above_left <= upper_yellow).all():
         if (screenshotNumber == 1):
             __cube[7] = 'Yellow'
         if (screenshotNumber == 2):
             __cube[4] = 'Yellow'
-        if (screenshotNumber == 3):
-            __cube[3] = 'Yellow'
+        #if (screenshotNumber == 3):
+            #__cube[3] = 'Yellow'
     if (average_color_above_left >= lower_red).all() and (average_color_above_left <= upper_red).all():
         if (screenshotNumber == 1):
             __cube[7] = 'Red'
         if (screenshotNumber == 2):
             __cube[4] = 'Red'
-        if (screenshotNumber == 3):
-            __cube[3] = 'Red'
+        #if (screenshotNumber == 3):
+            #__cube[3] = 'Red'
     if (average_color_above_left >= lower_blue).all() and (average_color_above_left <= upper_blue).all():
         if (screenshotNumber == 1):
             __cube[7] = 'Blue'
         if (screenshotNumber == 2):
             __cube[4] = 'Blue'
-        if (screenshotNumber == 3):
-            __cube[3] = 'Blue'
-    logging.debug("average_color_above_right" + str(average_color_above_right))
+        #if (screenshotNumber == 3):
+            #__cube[3] = 'Blue'
+    logging.debug("average_color_above_left" + str(average_color_above_left))
 
     if (average_color_above_right >= lower_yellow).all() and (average_color_above_right <= upper_yellow).all():
         if (screenshotNumber == 1):
@@ -329,3 +339,28 @@ def getColors(screenshotNumber, screenshot):
             #__cube[7] = 'Blue'  # Kann weggelassen werden, da bereits SC1 erkann
         #if (screenshotNumber == 3):
             #__cube[4] = 'Blue'  # Kann weggelassen werden, da bereits SC2 erkann
+    logging.debug("average_color_above_right" + str(average_color_above_right))
+
+    if (average_color_above >= lower_yellow).all() and (average_color_above <= upper_yellow).all():
+        if (screenshotNumber == 3):
+            __cube[3] = 'Yellow'
+
+    if (average_color_above >= lower_red).all() and (average_color_above <= upper_red).all():
+        if (screenshotNumber == 3):
+            __cube[3] = 'Red'
+
+    if (average_color_above >= lower_blue).all() and (average_color_above <= upper_blue).all():
+        if (screenshotNumber == 3):
+            __cube[3] = 'Blue'
+
+    if (average_color_bottom >= lower_yellow).all() and (average_color_bottom <= upper_yellow).all():
+        if (screenshotNumber == 3):
+            __cube[6] = 'Yellow'
+
+    if (average_color_bottom >= lower_red).all() and (average_color_bottom <= upper_red).all():
+        if (screenshotNumber == 3):
+            __cube[6] = 'Red'
+
+    if (average_color_bottom >= lower_blue).all() and (average_color_bottom <= upper_blue).all():
+        if (screenshotNumber == 3):
+            __cube[6] = 'Blue'
