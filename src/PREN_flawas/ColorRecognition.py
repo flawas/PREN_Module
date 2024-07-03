@@ -246,7 +246,7 @@ def getColors(screenshotNumber, screenshot):
     pts = pts.reshape((-1, 1, 2))
     mask = np.zeros(hsv.shape[:2], dtype=np.uint8)
     cv2.fillPoly(mask, [pts], 255)
-    roi_bottom = cv2.mean(hsv, mask=mask)
+    roi_bottom = cv2.mean(hsv, mask=mask) 
     average_color_bottom = np.array(roi_bottom[:3])
 
     if (average_color_bottom_left >= lower_yellow).all() and (average_color_bottom_left <= upper_yellow).all():
