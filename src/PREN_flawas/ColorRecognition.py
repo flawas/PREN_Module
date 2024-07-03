@@ -213,7 +213,7 @@ def getColors(screenshotNumber, screenshot):
     upper_red = np.array([160, 220, 255])
 
     lower_blue = np.array([3, 170, 130])
-    upper_blue = np.array([80, 255, 255])
+    upper_blue = np.array([89, 255, 255])
 
     lower_yellow = np.array([83, 170, 160])
     upper_yellow = np.array([140, 255, 240])
