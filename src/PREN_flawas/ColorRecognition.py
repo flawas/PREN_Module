@@ -212,10 +212,10 @@ def getColors(screenshotNumber, screenshot):
     lower_red = np.array([130, 120, 140])
     upper_red = np.array([165, 220, 255])
 
-    lower_blue = np.array([3, 170, 130])
+    lower_blue = np.array([3, 165, 130])
     upper_blue = np.array([89, 255, 255])
 
-    lower_yellow = np.array([83, 170, 160])
+    lower_yellow = np.array([83, 150, 160])
     upper_yellow = np.array([140, 255, 240])
 
     yellow_mask = cv2.inRange(hsv, lower_yellow, upper_yellow)
